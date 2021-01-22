@@ -1,5 +1,6 @@
 package com.archiver;
 
+import com.archiver.command.ExitCommand;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.nio.file.Paths;
@@ -22,6 +23,9 @@ public class Archiver {
         String archivePath = reader.readLine();
         zipFileManager.createZip(Paths.get(archivePath));
         reader.close();
+
+        ExitCommand exitCommand = new ExitCommand();
+        exitCommand.execute();
 
     }
 
