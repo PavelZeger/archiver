@@ -4,6 +4,11 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.nio.file.Paths;
 
+/**
+ * @author Pavel Zeger
+ * @implNote Archiver
+ * @since 22/01/2021
+ */
 public class Archiver {
 
     public static void main(String[] args) throws Exception {

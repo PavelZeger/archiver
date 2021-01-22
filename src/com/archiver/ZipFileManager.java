@@ -2,6 +2,11 @@ package com.archiver;
 
 import java.nio.file.Path;
 
+/**
+ * @author Pavel Zeger
+ * @implNote Archiver
+ * @since 22/01/2021
+ */
 public class ZipFileManager {
 
     private Path zipFile;
