@@ -1,8 +1,11 @@
 package com.archiver;
 
+import com.archiver.exception.PathIsNotFoundException;
 import java.io.InputStream;
+import java.io.OutputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.List;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
 
@@ -21,21 +24,50 @@ public class ZipFileManager {
     }
 
     public void createZip(Path source) throws Exception {
+        if (!Files.exists(zipFile.getParent())) {
+            Files.createDirectories(zipFile.getParent());
+
+        }
         try (ZipOutputStream zipOutputStream = new ZipOutputStream(Files.newOutputStream(zipFile))) {
-            ZipEntry zipEntry = new ZipEntry(source.getFileName().toString());
-            zipOutputStream.putNextEntry(zipEntry);
+            if (Files.isRegularFile(source)) {
+                addNewZipEntry(zipOutputStream, source.getParent(), source.getFileName());
 
-            byte[] buffer = new byte[1024];
-            int length;
-            try (InputStream inputStream = Files.newInputStream(source)) {
-                while ((length = inputStream.read(buffer)) > 0) {
-                    zipOutputStream.write(buffer, 0, length);
+            } else if (Files.isDirectory(source)) {
+                FileManager fileManager = new FileManager(source);
+                List<Path> fileNames = fileManager.getFileList();
+                fileNames.forEach(fileName -> {
+                    try {
+                        addNewZipEntry(zipOutputStream, source, fileName);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                });
 
-                }
-
-                zipOutputStream.closeEntry();
+            } else {
+                throw new PathIsNotFoundException();
 
             }
+
+        }
+
+    }
+
+    private void addNewZipEntry(ZipOutputStream zipOutputStream, Path filePath, Path fileName) throws Exception {
+        try (InputStream inputStream = Files.newInputStream(filePath.resolve(fileName))) {
+            ZipEntry zipEntry = new ZipEntry(fileName.toString());
+            zipOutputStream.putNextEntry(zipEntry);
+            copyData(inputStream, zipOutputStream);
+            zipOutputStream.closeEntry();
+
+        }
+
+    }
+
+    private void copyData(InputStream in, OutputStream out) throws Exception {
+        byte[] buffer = new byte[1024];
+        int length;
+        while ((length = in.read(buffer)) > 0) {
+            out.write(buffer, 0, length);
 
         }
 
