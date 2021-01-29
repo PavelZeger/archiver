@@ -16,14 +16,14 @@ public class ZipExtractCommand extends ZipCommand {
     @Override
     public void execute() throws Exception {
         try {
-            ConsoleHelper.writeMessage("Распаковка архива.");
+            ConsoleHelper.writeMessage("Extracting from archive.");
             ZipFileManager zipFileManager = getZipFileManager();
-            ConsoleHelper.writeMessage("Введите путь для распаковки:");
+            ConsoleHelper.writeMessage("Insert a path for extracting:");
             Path destinationPath = Paths.get(ConsoleHelper.readString());
             zipFileManager.extractAll(destinationPath);
-            ConsoleHelper.writeMessage("Архив был распакован.");
+            ConsoleHelper.writeMessage("The archive was extracted.");
         } catch (WrongZipFileException e) {
-            ConsoleHelper.writeMessage("Архив не существует.");
+            ConsoleHelper.writeMessage("The archive doesn't exist.");
         }
     }
 }

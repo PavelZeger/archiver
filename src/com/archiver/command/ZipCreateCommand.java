@@ -16,15 +16,15 @@ public class ZipCreateCommand extends ZipCommand {
     @Override
     public void execute() throws Exception {
         try {
-            ConsoleHelper.writeMessage("Создание архива.");
+            ConsoleHelper.writeMessage("Creating archive.");
             ZipFileManager zipFileManager = getZipFileManager();
             ConsoleHelper.writeMessage("Please write the full path to the archive file:");
             String archiveFileString = ConsoleHelper.readString();
             Path archiveFilePath = Paths.get(archiveFileString);
             zipFileManager.createZip(archiveFilePath);
-            ConsoleHelper.writeMessage("Архив создан.");
+            ConsoleHelper.writeMessage("The archive was created.");
         } catch (PathIsNotFoundException e) {
-            ConsoleHelper.writeMessage("Вы неверно указали имя файла или директории.");
+            ConsoleHelper.writeMessage("You've inserted the wrong file name or directory name.");
         }
     }
 

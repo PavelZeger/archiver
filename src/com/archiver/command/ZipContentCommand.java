@@ -14,14 +14,14 @@ public class ZipContentCommand extends ZipCommand {
 
     @Override
     public void execute() throws Exception {
-        ConsoleHelper.writeMessage("Просмотр содержимого архива.");
+        ConsoleHelper.writeMessage("Reading the content of the archive.");
         ZipFileManager zipFileManager = getZipFileManager();
-        ConsoleHelper.writeMessage("Содержимое архива:");
+        ConsoleHelper.writeMessage("The content of the archive:");
         List<FileProperties> filePropertiesList = zipFileManager.getFilesList();
         filePropertiesList.stream()
                 .map(FileProperties::toString)
                 .forEach(System.out::println);
-        ConsoleHelper.writeMessage("Содержимое архива прочитано.");
+        ConsoleHelper.writeMessage("The content of the archive was read.");
     }
 
 }
