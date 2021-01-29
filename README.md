@@ -1,5 +1,5 @@
 # Archiver
-Archiver with console management.
+Archiver with console management.  
 Possible actions:
 * Add files to an archive
 * Get a content of an archive
