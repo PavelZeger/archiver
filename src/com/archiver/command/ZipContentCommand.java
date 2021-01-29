@@ -18,7 +18,6 @@ public class ZipContentCommand extends ZipCommand {
         ZipFileManager zipFileManager = getZipFileManager();
         ConsoleHelper.writeMessage("Содержимое архива:");
         List<FileProperties> filePropertiesList = zipFileManager.getFilesList();
-        //filePropertiesList.forEach(fileProperties -> System.out.println(fileProperties.toString()));
         filePropertiesList.stream()
                 .map(FileProperties::toString)
                 .forEach(System.out::println);
