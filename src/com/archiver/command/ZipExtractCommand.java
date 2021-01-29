@@ -6,4 +6,9 @@ package com.archiver.command;
  * @since 22/01/2021
  */
 public class ZipExtractCommand extends ZipCommand {
+
+    @Override
+    public void execute() {
+
+    }
 }
