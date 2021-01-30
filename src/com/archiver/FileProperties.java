@@ -36,7 +36,7 @@ public class FileProperties {
     }
 
     public long getCompressionRatio() {
-        return 100 - ((getCompressedSize() * 100) / getSize());
+        return 100 - ((compressedSize * 100) / size);
     }
 
     @Override
